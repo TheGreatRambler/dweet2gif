@@ -4,7 +4,7 @@
   "description": "Get a dweet as a gif",
   "dependencies": {
     "canvas": "^1.6.11",
-    "gifencoder": "^1.1.0",
+    "gif-encoder": "^0.6.1",
     "request": "^2.87.0"
   },
   "repository": {
