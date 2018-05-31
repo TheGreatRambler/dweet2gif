@@ -1,6 +1,6 @@
 var vm = require("vm");
 var Canvas = require("canvas");
-var GIFEncoder = require("gif-encoder");
+var GifEncoder = require("gif-encoder");
 var request = require("request");
 
 function getDweetCode() {
@@ -36,7 +36,7 @@ function getFrames(cb) {
 		var intervalId = setInterval(function() {
 			if (timesaround < framestouse) {
 				script.runInContext(context);
-				frameArray.push(can.toBuffer());
+				frameArray.push(ctx.getImageData(0, 0, can.width, can.height).data);
 				context.t += 100;
 				timesaround += 1;
 			} else {
@@ -50,6 +50,9 @@ function getFrames(cb) {
 
 function start() {
 	getFrames().then(function(frames) {
-		var encoder = new GIFEncoder(1920, 1080);
+		var gif = new GifEncoder(1920, 1080);
+		frames.forEach(function(frame) {
+			
+		});
 	});
 }
