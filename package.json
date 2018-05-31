@@ -2,6 +2,7 @@
   "name": "dweet2gif",
   "version": "0.0.1",
   "description": "Get a dweet as a gif",
+  "main": "index.js",
   "dependencies": {
     "canvas": "^1.6.11",
     "gif-encoder": "^0.6.1",
