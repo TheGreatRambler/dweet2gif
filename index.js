@@ -51,8 +51,11 @@ function getFrames(cb) {
 function start() {
 	getFrames().then(function(frames) {
 		var gif = new GifEncoder(1920, 1080);
+		gif.setDelay(100);
+		gif.setRepeat(0);
 		frames.forEach(function(frame) {
-			
+			gif.addFrame(frame);
 		});
+		gif.finish();
 	});
 }
