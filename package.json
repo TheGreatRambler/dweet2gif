@@ -5,7 +5,8 @@
   "dependencies": {
     "canvas": "^1.6.11",
     "gif-encoder": "^0.6.1",
-    "request": "^2.87.0"
+    "request": "^2.87.0",
+    "memory-streams": "^0.1.3"
   },
   "repository": {
     "type": "git",
