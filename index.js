@@ -1,17 +1,20 @@
 var vm = require("vm");
 var Canvas = require("canvas");
-var GIFEncoder = require("gifencoder");
+var GIFEncoder = require("gif-encoder");
 var request = require("request");
 
-function getDweetCode(cb) {
-	request("https://www.dwitter.net/api/dweets/?limit=1", function (error, response, body) {
-  		var code = JSON.parse(body).results.code
-		cb(code);
+function getDweetCode() {
+	return new Promise(function(resolve, reject) {
+		request("https://www.dwitter.net/api/dweets/?limit=1", function (error, response, body) {
+  			var code = JSON.parse(body).results.code
+			resolve(code);
+		});
 	});
 }
 
 function getFrames(cb) {
-	getDweetCode(function(code) {
+	return new Promise(function(resolve, reject) {
+	getDweetCode().then(function(code) {
 		var framestouse = 50;
 		var can = new Canvas(1920, 1080);
 		var ctx = can.getContext("2d");
@@ -38,8 +41,15 @@ function getFrames(cb) {
 				timesaround += 1;
 			} else {
 				clearInterval(intervalId);
-				cb(frameArray);
+				resolve(frameArray);
 			}
 		}, 100);
+	});
+	});
+}
+
+function start() {
+	getFrames().then(function(frames) {
+		var encoder = new GIFEncoder(1920, 1080);
 	});
 }
