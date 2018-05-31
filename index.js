@@ -2,6 +2,7 @@ var vm = require("vm");
 var Canvas = require("canvas");
 var GifEncoder = require("gif-encoder");
 var request = require("request");
+var streams = require("memory-streams");
 
 function getDweetCode() {
 	return new Promise(function(resolve, reject) {
@@ -49,13 +50,18 @@ function getFrames(cb) {
 }
 
 function start() {
-	getFrames().then(function(frames) {
-		var gif = new GifEncoder(1920, 1080);
-		gif.setDelay(100);
-		gif.setRepeat(0);
-		frames.forEach(function(frame) {
-			gif.addFrame(frame);
+	return new Promise(function(resolve, reject) {
+		getFrames().then(function(frames) {
+			var gif = new GifEncoder(1920, 1080);
+			var writer = new streams.WritableStream();
+			gif.pipe(writer);
+			gif.setDelay(100);
+			gif.setRepeat(0);
+			frames.forEach(function(frame) {
+				gif.addFrame(frame);
+			});
+			gif.finish();
+			resolve(writer.toBuffer());
 		});
-		gif.finish();
 	});
 }
