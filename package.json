@@ -1,0 +1,18 @@
+{
+  "name": "dweet2gif",
+  "version": "0.0.1",
+  "description": "Get a dweet as a gif",
+  "dependencies": {
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheGreatRambler/dweet2gif"
+  },
+  "keywords": [
+    "dweet",
+    "gif"
+  ],
+  "author": "TheGreatRambler",
+  "license": "MIT"
+}
